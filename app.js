@@ -88,6 +88,8 @@ class App {
 
     // Start a rendering loop using this.onXRFrame.
     this.xrSession.requestAnimationFrame(this.onXRFrame);
+
+    this.xrSession.addEventListener("select", this.onSelect);
   }
 
   /**
@@ -169,6 +171,14 @@ class App {
     // to handle the matrices independently.
     this.camera = new THREE.PerspectiveCamera();
     this.camera.matrixAutoUpdate = false;
+  }
+
+  onSelect = () => {
+    if (window.sunflower) {
+      const clone = window.sunflower.clone();
+      clone.position.copy(this.reticle.position);
+      this.scene.add(clone);
+    }
   }
 };
 
