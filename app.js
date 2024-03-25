@@ -92,6 +92,15 @@ class App {
     this.xrSession.addEventListener("select", this.onSelect);
   }
 
+  /** Place a sunflower when the screen is tapped. */
+  onSelect = () => {
+    if (window.sunflower) {
+      const clone = window.sunflower.clone();
+      clone.position.copy(this.reticle.position);
+      this.scene.add(clone)
+    }
+  }
+
   /**
    * Called on the XRSession's requestAnimationFrame.
    * Called with the time and XRPresentationFrame.
@@ -171,14 +180,6 @@ class App {
     // to handle the matrices independently.
     this.camera = new THREE.PerspectiveCamera();
     this.camera.matrixAutoUpdate = false;
-  }
-
-  onSelect = () => {
-    if (window.sunflower) {
-      const clone = window.sunflower.clone();
-      clone.position.copy(this.reticle.position);
-      this.scene.add(clone);
-    }
   }
 };
 
